@@ -9,31 +9,58 @@ In this sender has send a large size messages into smaller chunks and receiver r
 
 Brief description :-
 
-We have system.txt -> In which all system with their name and port number is listed . 
-	send file -> To whom we send the message .
-	miss file -> Stored missing packets number or all packet received msg.
-	conf file -> Confirmation file , stored acknowledgment from the receiver side .
-	inter file ->Intermediate file , between ear and mouth.
-	msg file  -> Message file , stored filename from user.
-	file file -> stored all filename that we have received.
+-We have system.txt -> In which all system with their name and port number is listed . 
+-send file -> To whom we send the message .
+-miss file -> Stored missing packets number or all packet received msg.
+-conf file -> Confirmation file , stored acknowledgment from the receiver side .
+-inter file ->Intermediate file , between ear and mouth.
+-msg file  -> Message file , stored filename from user.
+-file file -> stored all filename that we have received.
 
-Take input from user for system number, this input is writing in send file , another input from user is filename (eg. text file , image , video) , which is writing into message file.
-By reading send file we found out system number , to determine port number of that system we read system.txt file in which all system with their port number listed already.
-By reading message file we found filename which user want to send , open that file and compute the packets according to system buffer size .
-By all these information we create instruction message which consist header 'a' , filename , sender's port number ,  total number of packets , maximum data size in one packet .
-On receiver side after receiving(ear) instruction message , ear connect with its mouth through inter file to send acknowlegdment to sender .
-On sender side after receiving acknowledgment ear will put this message in console file. and then sender's mouth send messages with header '1' and packet number.
-On sender side after sending all the packets , sender send a acknowledgment to receiver with header 'c' that all packets are send from sender side . 
-On receiver side after receiving header 'c' message , if some packets are missing then it will send a message to sender with header 'f' and missing packets number.
-On sender side after receiving acknowledgment with header 'f' , create miss file in which all missing packets number is stored .
-If there are some missing packets then it will resend that packets otherwise receiver will send acknowledgment with header 'e' as all packets are received .
+Process Flow
 
+-User Input:
+        -The user provides a system number, which is stored in the send file.
+        -The user specifies a filename (e.g., text file, image, or video), which is stored in the message file.
+
+-Determining the Target System:
+        -The system number is retrieved from the send file.
+        -The corresponding port number is found by reading the system.txt file, which contains a list of systems and their port numbers.
+
+-File Processing:
+        -The filename is retrieved from the message file.
+        -The specified file is opened, and packets are computed based on the system’s buffer size.
+
+-Instruction Message Creation:
+        -A structured instruction message is created, consisting of:
+            -Header (a)
+            -Filename
+            -Sender’s port number
+            -Total number of packets
+            -Maximum data size per packet
+
+-Acknowledgment Exchange:
+        -The receiver’s "ear" component receives the instruction message and connects to its "mouth" via an inter-process file to send an acknowledgment.
+        -The sender’s "ear" receives this acknowledgment and logs it in the console file.
+
+-Data Transmission:
+        -The sender’s "mouth" transmits packets with:
+            -Header (1)
+            -Packet number
+
+-Completion and Verification:
+        -After sending all packets, the sender transmits a completion acknowledgment with the header (c).
+        -The receiver checks for missing packets. If any packets are missing, it sends a request with the header (f), listing the missing packet numbers.
+        -The sender logs the missing packets in the miss file and resends them.
+
+-Final Acknowledgment:
+        -Once all packets are successfully received, the receiver sends a final acknowledgment with the header (e), confirming the successful transmission.
 ####RUN:
 Type `make` in your terminal to execute the Makefile.
 `./a.out` <system name> <port number>
 
 ####CLEAN:
-Enter `make clean' to remove all the object files and their final exectuable.
+Enter `make clean` to remove all the object files and their final exectuable.
 Also remove all miss , send , conf , inter , msg , file files.
 
    
