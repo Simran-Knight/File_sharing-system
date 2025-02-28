@@ -5,7 +5,7 @@
 	SIMRAN SINGH ,ROLL NO - 23111059
 
 ####DESCRIPTION:This is an assignment given to us for the course,`CS-603 SYSTEM-III` during 3rd semster of academic year 2024 , with the aim to understand the features of networking in real-time application .
-In this sender has send a large size messages into smaller chunks and receiver receive the small chunks to form a messages where messages can be a text file , images , videos . We have been using UDP Socket and C language to develop communication between multiple systems.
+In this sender has send a large size messages into smaller chunks and receiver receive the small chunks to form a messages where messages can be a text file , images , videos . We have been using UDP Socket and C language to develop communication between multiple terminals(processes).
 
 Brief description :-
 
